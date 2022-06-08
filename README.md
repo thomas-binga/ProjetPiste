@@ -1,6 +1,6 @@
 # ProjetPiste
 
-## Run the application :
+## Pour démarrer le projet :
 - Installer node
 
 - Ouvrir le projet sur intellij
