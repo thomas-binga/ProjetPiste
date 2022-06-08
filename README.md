@@ -2,6 +2,7 @@
 
 ## Pour démarrer le projet :
 - Installer node
+- Lancer la BD avec la base de données préalablement remplie
 
 - Ouvrir le projet sur intellij
 - Définir la version de Java comme étant Java 17
