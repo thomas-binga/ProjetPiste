@@ -2,12 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import ListEmployeeComponent from './components/ListEmployeeComponent';
+import ListUsersComponent from './components/ListUserComponent';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
-import CreateEmployeeComponent from './components/CreateEmployeeComponent';
-import UpdateEmployeeComponent from './components/UpdateEmployeeComponent';
-import ViewEmployeeComponent from './components/ViewEmployeeComponent';
+import CreateUserComponent from './components/CreateUserComponent';
+import UpdateUserComponent from './components/UpdateUserComponent';
+import ViewUserComponent from './components/ViewUserComponent';
 
 function App() {
   return (
@@ -15,12 +15,12 @@ function App() {
         <Router>
               <HeaderComponent />
                 <div className="container">
-                    <Switch> 
-                          <Route path = "/" exact component = {ListEmployeeComponent}></Route>
-                          <Route path = "/employees" component = {ListEmployeeComponent}></Route>
-                          <Route path = "/add-employee/:id" component = {CreateEmployeeComponent}></Route>
-                          <Route path = "/view-employee/:id" component = {ViewEmployeeComponent}></Route>
-                          {/* <Route path = "/update-employee/:id" component = {UpdateEmployeeComponent}></Route> */}
+                    <Switch>
+                          <Route path = "/" exact component = {ListUsersComponent}/>
+                          <Route path = "/users" component = {ListUsersComponent}/>
+                          <Route path = "/add-user/:id" component = {CreateUserComponent}/>
+                          <Route path = "/view-user/:id" component = {ViewUserComponent}/>
+                          {/* <Route path = "/update-user/:id" component = {UpdateuserComponent}></Route> */}
                     </Switch>
                 </div>
               <FooterComponent />
