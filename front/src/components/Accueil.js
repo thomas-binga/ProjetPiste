@@ -2,7 +2,7 @@ import React from 'react';
 
 const pStyle = {fontSize: "15px", margin: "0px 0px 0px 50px"};
 
-const actualDate = new Date();
+const currentDate = new Date();
 
 const Accueil = () => {
 
@@ -20,8 +20,8 @@ const Accueil = () => {
                 <div style={{width: "50%"}}>
                     <h2 style={{fontSize: "25px", marginBottom: "20px"}}>Bienvenue dans l'application Permis Piste !</h2>
                     <p style={pStyle}>
-                        Nous sommes le {actualDate.getDate() + " " + actualDate.toLocaleString("default", {month: "long"}) + " " + actualDate.getFullYear()}.
-                        Il est {actualDate.getHours() + "h" + actualDate.getMinutes() + "."}
+                        Nous sommes le {currentDate.getDate() + " " + currentDate.toLocaleString("default", {month: "long"}) + " " + currentDate.getFullYear()}.
+                        Il est {currentDate.getHours() + "h" + ("0" + currentDate.getMinutes()).slice(-2) + "."}
                     </p>
                     <br/>
                     <p style={pStyle}>Cette application vous permettra de suivre pas à pas tous les apprentissages.</p>
@@ -29,7 +29,7 @@ const Accueil = () => {
                     <br/>
                     <p style={pStyle}>Pour commencer, vous pouvez :</p>
                     <ol>
-                        <li style={pStyle}><a href="">Enregistrer un apprenant</a></li>
+                        <li style={pStyle}><a href="/inscription">Enregistrer un apprenant</a></li>
                         <li style={pStyle}><a href="">Inscrire un apprenant à des actions</a></li>
                         <li style={pStyle}><a href="">Accéder à la liste des missions</a></li>
                     </ol>
