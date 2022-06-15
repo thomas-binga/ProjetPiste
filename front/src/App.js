@@ -9,6 +9,7 @@ import CreateUserComponent from './components/CreateUserComponent';
 import UpdateUserComponent from './components/UpdateUserComponent';
 import ViewUserComponent from './components/ViewUserComponent';
 import Accueil from "./components/Accueil";
+import Inscription from "./components/Inscription";
 import ListActionsComponent from "./components/ListActionsComponent";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                         <Route path = "/users/create" component = {CreateUserComponent}/>
                         <Route path = "/add-user/:id" component = {CreateUserComponent}/>
                         <Route path = "/view-user/:id" component = {ViewUserComponent}/>
+                        <Route path = "/inscription" component = {Inscription}/>
                           {/* <Route path = "/update-user/:id" component = {UpdateuserComponent}></Route> */}
                     </Switch>
                 </div>
