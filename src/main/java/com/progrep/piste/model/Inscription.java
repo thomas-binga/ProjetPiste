@@ -21,9 +21,6 @@ public class Inscription {
     @Column(name = "fk_mission")
     private int fk_mission;
 
-    @Column(name = "date")
-    private String date;
-
     public Inscription(int fk_utilisateur, int fk_mission) {
         super();
         this.fk_utilisateur = fk_utilisateur;

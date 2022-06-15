@@ -14,7 +14,7 @@ public class Action {
         @Id
         private int id;
 
-        @Column(name = "wording")
+        @Column(name = "description")
         private String description;
 
 

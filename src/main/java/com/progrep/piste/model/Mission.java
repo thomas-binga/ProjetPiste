@@ -17,6 +17,6 @@ public class Mission {
     @Id
     private int id;
 
-    @Column(name = "wording")
+    @Column(name = "nom")
     private String nom;
 }
