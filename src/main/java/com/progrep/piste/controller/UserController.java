@@ -43,7 +43,7 @@ public class UserController {
 	public Utilisateur createUser(@RequestBody Utilisateur utilisateur, @RequestBody List<Integer> missionsId) {
 		Utilisateur user = UserRepository.save(utilisateur);
 		for (Integer missionId : missionsId) {
-			InscriptionRepository.save(new Inscription(user.getNumUtil(), missionId));
+			InscriptionRepository.save(new Inscription(user.getNumUtil(), missionId)); //TODO fill INSCRIPTION__ACTION as well
 		}
 
 		return user;
