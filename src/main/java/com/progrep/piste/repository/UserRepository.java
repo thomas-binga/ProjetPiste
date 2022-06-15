@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.progrep.piste.model.Utilisateur;
 
 @Repository
-public interface UserRepository extends JpaRepository<Utilisateur, Long>{
+public interface UserRepository extends JpaRepository<Utilisateur, Integer>{
 
 }

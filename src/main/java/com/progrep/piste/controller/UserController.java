@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.progrep.piste.model.Inscription;
 import com.progrep.piste.model.Utilisateur;
+import com.progrep.piste.repository.InscriptionRepository;
+import com.progrep.piste.repository.MissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,11 +25,12 @@ import com.progrep.piste.repository.UserRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/")
 public class UserController {
 
 	@Autowired
 	private UserRepository UserRepository;
+	private InscriptionRepository InscriptionRepository;
 	
 	// get all Users
 	@GetMapping("/users")
@@ -36,13 +40,18 @@ public class UserController {
 	
 	// create User rest api
 	@PostMapping("/users")
-	public Utilisateur createUser(@RequestBody Utilisateur utilisateur) {
-		return UserRepository.save(utilisateur);
+	public Utilisateur createUser(@RequestBody Utilisateur utilisateur, @RequestBody List<Integer> missionsId) {
+		Utilisateur user = UserRepository.save(utilisateur);
+		for (Integer missionId : missionsId) {
+			InscriptionRepository.save(new Inscription(user.getNumUtil(), missionId));
+		}
+
+		return user;
 	}
 	
 	// get User by id rest api
 	@GetMapping("/users/{id}")
-	public ResponseEntity<Utilisateur> getUserById(@PathVariable Long id) {
+	public ResponseEntity<Utilisateur> getUserById(@PathVariable Integer id) {
 		Utilisateur utilisateur = UserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
 		return ResponseEntity.ok(utilisateur);
@@ -51,7 +60,7 @@ public class UserController {
 	// update User rest api
 	
 	@PutMapping("/Users/{id}")
-	public ResponseEntity<Utilisateur> updateUser(@PathVariable Long id, @RequestBody Utilisateur utilisateurDetails){
+	public ResponseEntity<Utilisateur> updateUser(@PathVariable Integer id, @RequestBody Utilisateur utilisateurDetails){
 		Utilisateur utilisateur = UserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
 		
@@ -65,7 +74,7 @@ public class UserController {
 	
 	// delete User rest api
 	@DeleteMapping("/Users/{id}")
-	public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable Long id){
+	public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable Integer id){
 		Utilisateur utilisateur = UserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
 		

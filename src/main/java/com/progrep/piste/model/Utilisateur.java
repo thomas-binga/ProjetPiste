@@ -1,5 +1,8 @@
 package com.progrep.piste.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "utilisateur")
 public class Utilisateur {
@@ -14,7 +19,7 @@ public class Utilisateur {
 
 
 	@Id
-	@Column(name = "NumUtil")
+	@Column(name = "numutil")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int NumUtil;
 	
@@ -40,28 +45,4 @@ public class Utilisateur {
 
 	}
 
-	public int getId() {
-		return NumUtil;
-	}
-	public void setId(int NumUtil) {
-		this.NumUtil = NumUtil;
-	}
-	public String getSurname() {
-		return surname;
-	}
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-	public String getForename() {
-		return forename;
-	}
-	public void setForename(String forename) {
-		this.forename = forename;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 }
