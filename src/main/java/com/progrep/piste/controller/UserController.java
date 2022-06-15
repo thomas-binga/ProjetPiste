@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.progrep.piste.model.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.progrep.piste.exception.ResourceNotFoundException;
-import com.progrep.piste.model.User;
 import com.progrep.piste.repository.UserRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -30,46 +30,46 @@ public class UserController {
 	
 	// get all Users
 	@GetMapping("/users")
-	public List<User> getAllUsers(){
+	public List<Utilisateur> getAllUsers(){
 		return UserRepository.findAll();
 	}		
 	
 	// create User rest api
 	@PostMapping("/users")
-	public User createUser(@RequestBody User User) {
-		return UserRepository.save(User);
+	public Utilisateur createUser(@RequestBody Utilisateur utilisateur) {
+		return UserRepository.save(utilisateur);
 	}
 	
 	// get User by id rest api
 	@GetMapping("/users/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable Long id) {
-		User User = UserRepository.findById(id)
+	public ResponseEntity<Utilisateur> getUserById(@PathVariable Long id) {
+		Utilisateur utilisateur = UserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
-		return ResponseEntity.ok(User);
+		return ResponseEntity.ok(utilisateur);
 	}
 	
 	// update User rest api
 	
 	@PutMapping("/Users/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User UserDetails){
-		User User = UserRepository.findById(id)
+	public ResponseEntity<Utilisateur> updateUser(@PathVariable Long id, @RequestBody Utilisateur utilisateurDetails){
+		Utilisateur utilisateur = UserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
 		
-		User.setSurname(UserDetails.getSurname());
-		User.setForename(UserDetails.getForename());
-		User.setEmail(UserDetails.getEmail());
+		utilisateur.setSurname(utilisateurDetails.getSurname());
+		utilisateur.setForename(utilisateurDetails.getForename());
+		utilisateur.setEmail(utilisateurDetails.getEmail());
 		
-		User updatedUser = UserRepository.save(User);
-		return ResponseEntity.ok(updatedUser);
+		Utilisateur updatedUtilisateur = UserRepository.save(utilisateur);
+		return ResponseEntity.ok(updatedUtilisateur);
 	}
 	
 	// delete User rest api
 	@DeleteMapping("/Users/{id}")
 	public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable Long id){
-		User User = UserRepository.findById(id)
+		Utilisateur utilisateur = UserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
 		
-		UserRepository.delete(User);
+		UserRepository.delete(utilisateur);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);

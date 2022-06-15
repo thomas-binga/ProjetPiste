@@ -9,13 +9,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur")
-public class User {
+public class Utilisateur {
 
 
-	@Column(name = "NumUtil")
+
 	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Column(name = "NumUtil")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int NumUtil;
 	
 	@Column(name = "surname")
 	private String surname;
@@ -25,22 +26,25 @@ public class User {
 	
 	@Column(name = "email")
 	private String email;
+
 	
-	public User() {
-		
-	}
-	
-	public User(String surname, String forename, String email) {
+	public Utilisateur(String surname, String forename, String email) {
 		super();
 		this.surname = surname;
 		this.forename = forename;
 		this.email = email;
 	}
-	public long getId() {
-		return id;
+
+	public Utilisateur() {
+		super();
+
 	}
-	public void setId(long id) {
-		this.id = id;
+
+	public int getId() {
+		return NumUtil;
+	}
+	public void setId(int NumUtil) {
+		this.NumUtil = NumUtil;
 	}
 	public String getSurname() {
 		return surname;

@@ -8,6 +8,7 @@ import FooterComponent from './components/FooterComponent';
 import CreateUserComponent from './components/CreateUserComponent';
 import UpdateUserComponent from './components/UpdateUserComponent';
 import ViewUserComponent from './components/ViewUserComponent';
+import Accueil from "./components/Accueil";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
               <HeaderComponent />
                 <div className="container">
                     <Switch>
-                          <Route path = "/" exact component = {ListUsersComponent}/>
+                          <Route path = "/" exact component = {Accueil}/>
                           <Route path = "/users" component = {ListUsersComponent}/>
                           <Route path = "/add-user/:id" component = {CreateUserComponent}/>
                           <Route path = "/view-user/:id" component = {ViewUserComponent}/>
