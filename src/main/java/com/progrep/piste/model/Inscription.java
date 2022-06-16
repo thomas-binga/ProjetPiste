@@ -15,16 +15,18 @@ public class Inscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "fk_utilisateur")
-    private int fk_utilisateur;
+    @ManyToOne
+    @JoinColumn(name = "fk_utilisateur")
+    private Utilisateur utilisateur;
 
-    @Column(name = "fk_mission")
-    private int fk_mission;
+    @ManyToOne
+    @JoinColumn(name = "fk_mission")
+    private Mission fk_mission;
 
-    public Inscription(int fk_utilisateur, int fk_mission) {
+    public Inscription(Utilisateur utilisateur, Mission mission) {
         super();
-        this.fk_utilisateur = fk_utilisateur;
-        this.fk_mission = fk_mission;
+        this.utilisateur = utilisateur;
+        this.fk_mission = mission;
     }
 
 

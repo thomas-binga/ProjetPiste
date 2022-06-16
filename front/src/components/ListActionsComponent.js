@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import ActionService from '../services/ActionService'
+import {useParams} from "react-router-dom";
 
-const ListActionsComponent = ({user, mission}) => {
+const ListActionsComponent = () => {
+    let {userId, missionId} = useParams();
     const [actions, setActions] = useState([])
+    console.log({userId, missionId})
 
     useEffect(() => {
-        ActionService.getActions({user, mission}).then(response => {
+        ActionService.getActions({userId, missionId}).then(response => {
             console.log("retrieving actions", {response})
             setActions(response.data)
         })
@@ -52,7 +55,7 @@ const ListActionsComponent = ({user, mission}) => {
                         <th> Id </th>
                         <th> Description</th>
                         <th> Score minimum </th>
-                        {user ? <th> User score </th> : null}
+                        {userId ? <th> User score </th> : null}
                     </tr>
                     </thead>
                     <tbody>
@@ -63,9 +66,9 @@ const ListActionsComponent = ({user, mission}) => {
                                     <td> {action.id} </td>
                                     <td> {action.description} </td>
                                     <td> {action.scoreMinimum}</td>
-                                    {user ? <td> {action.userScore}</td> : null}
+                                    {userId ? <td> {action.userScore}</td> : null}
                                     <td>
-                                        {user ? <button onClick={ () => editAction(user.id)} className="btn btn-info"> Mettre a jour </button> : null}
+                                        {userId ? <button onClick={ () => editAction(userId)} className="btn btn-info"> Mettre a jour </button> : null}
                                         {/*<button style={{marginLeft: "10px"}} onClick={ () => viewUser(user.id)} className="btn btn-dark"> Voir jeux </button> //TODO if time*/}
                                     </td>
                                 </tr>

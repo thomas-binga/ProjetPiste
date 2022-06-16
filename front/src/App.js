@@ -22,7 +22,9 @@ function App() {
                     <Switch>
                         <Route path = "/" exact component = {Accueil}/>
                         <Route path = "/users" component = {ListUsersComponent}/>
-                        <Route path = "/actions" component = {ListActionsComponent}/>
+                        {/*<Route path = "/actions" component = {ListActionsComponent}/>*/}
+                        <Route path = "/actions/byUser/:userId" children={<ListActionsComponent/>}/>
+                        <Route path = "/actions/byMission/:missionId" children={<ListActionsComponent/>}/>
                         <Route path = "/users/create" component = {CreateUserComponent}/>
                         <Route path = "/add-user/:id" component = {CreateUserComponent}/>
                         <Route path = "/view-user/:id" component = {ViewUserComponent}/>

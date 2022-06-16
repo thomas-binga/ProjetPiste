@@ -33,6 +33,8 @@ public class UserController {
 	private UserRepository UserRepository;
 	@Autowired
 	private InscriptionRepository InscriptionRepository;
+	@Autowired
+	private MissionRepository MissionRepository;
 	
 	// get all Users
 	@GetMapping("/users")
@@ -46,7 +48,7 @@ public class UserController {
 	public Utilisateur createUser(@RequestBody UserWithMissionId userWithMissionId) {
 		Utilisateur user = UserRepository.save(userWithMissionId.getUtilisateur());
 		for (Integer missionId : userWithMissionId.getMissionIdList()) {
-			InscriptionRepository.save(new Inscription(user.getNumUtil(), missionId));
+			InscriptionRepository.save(new Inscription(user, MissionRepository.getReferenceById(missionId)));
 			//TODO fill INSCRIPTION__ACTION as well
 		}
 		return user;
