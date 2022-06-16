@@ -9,7 +9,7 @@ class UserService {
     }
 
     createUser({user, missions}) {
-        return axios.post(USER_API_BASE_URL, {user, missions});
+        return axios.post(USER_API_BASE_URL, {utilisateur: user, missionIdList: missions});
     }
 
     getUserById(userId) {

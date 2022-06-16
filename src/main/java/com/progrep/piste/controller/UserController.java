@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.progrep.piste.model.Inscription;
+import com.progrep.piste.model.UserWithMissionId;
 import com.progrep.piste.model.Utilisateur;
 import com.progrep.piste.repository.InscriptionRepository;
 import com.progrep.piste.repository.MissionRepository;
@@ -30,6 +31,7 @@ public class UserController {
 
 	@Autowired
 	private UserRepository UserRepository;
+	@Autowired
 	private InscriptionRepository InscriptionRepository;
 	
 	// get all Users
@@ -39,10 +41,11 @@ public class UserController {
 	}		
 	
 	// create User rest api
+
 	@PostMapping("/users")
-	public Utilisateur createUser(@RequestBody Utilisateur utilisateur, @RequestBody List<Integer> missionsId) {
-		Utilisateur user = UserRepository.save(utilisateur);
-		for (Integer missionId : missionsId) {
+	public Utilisateur createUser(@RequestBody UserWithMissionId userWithMissionId) {
+		Utilisateur user = UserRepository.save(userWithMissionId.getUtilisateur());
+		for (Integer missionId : userWithMissionId.getMissionIdList()) {
 			InscriptionRepository.save(new Inscription(user.getNumUtil(), missionId));
 			//TODO fill INSCRIPTION__ACTION as well
 		}
