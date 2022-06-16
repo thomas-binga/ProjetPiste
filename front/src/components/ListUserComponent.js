@@ -20,10 +20,10 @@ const ListUserComponent = () => {
         });
     }
 
-    function viewActions() {
+    function viewActions(id) {
         // this.props.history.push(`/view-user/${id}`); TODO
         console.log("coucou");
-        setRedirectState({redirect: true, path: "/"});
+        setRedirectState({redirect: true, path: "/actions/byUser/"+id});
     }
 
     function editUser(id) {
@@ -67,7 +67,7 @@ const ListUserComponent = () => {
                                         <td>{user.email}</td>
                                         <td>
                                             <button
-                                                onClick={() => viewActions()}
+                                                onClick={() => viewActions(user.numUtil)}
                                                 className="btn btn-info"
                                             >
                                                 Voir ses actions

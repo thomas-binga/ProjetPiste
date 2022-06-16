@@ -24,7 +24,7 @@ public class MissionController {
     private MissionRepository missionRepository;
     private ActionRepository actionRepository;
 
-    // get all Missions
+    // get all ListMissionsComponent
     @GetMapping("/missions")
     public List<Mission> getAllMissions(){
         return missionRepository.findAll();

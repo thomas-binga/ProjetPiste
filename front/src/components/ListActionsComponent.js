@@ -50,8 +50,7 @@ const ListActionsComponent = () => {
                     <tr>
                         <th> Id </th>
                         <th> Description</th>
-                        <th> Score minimum </th>
-                        {userId ? <th> User score </th> : null}
+                        {userId ? <th> User score </th> : <br/>}
                     </tr>
                     </thead>
                     <tbody>
@@ -61,12 +60,9 @@ const ListActionsComponent = () => {
                                 <tr key = {action.id}>
                                     <td> {action.id} </td>
                                     <td> {action.description} </td>
-                                    <td> {action.scoreMinimum}</td>
                                     {userId ? <td> {action.userScore}</td> : null}
-                                    <td>
-                                        {userId ? <button onClick={ () => editAction(userId)} className="btn btn-info"> Mettre a jour </button> : null}
+                                        {userId ? <td><button onClick={ () => editAction(userId)} className="btn btn-info"> Mettre a jour </button></td> : null}
                                         {/*<button style={{marginLeft: "10px"}} onClick={ () => viewUser(user.id)} className="btn btn-dark"> Voir jeux </button> //TODO if time*/}
-                                    </td>
                                 </tr>
                         )
                     }

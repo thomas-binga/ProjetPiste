@@ -11,7 +11,7 @@ import ViewUserComponent from './components/ViewUserComponent';
 import Accueil from "./components/Accueil";
 import Inscription from "./components/Inscription";
 import ListActionsComponent from "./components/ListActionsComponent";
-import Missions from "./components/Missions";
+import ListMissionsComponent from "./components/ListMissionsComponent";
 
 function App() {
   return (
@@ -22,14 +22,14 @@ function App() {
                     <Switch>
                         <Route path = "/" exact component = {Accueil}/>
                         <Route path = "/users" component = {ListUsersComponent}/>
-                        {/*<Route path = "/actions" component = {ListActionsComponent}/>*/}
+                        <Route path = "/actions" exact component = {ListActionsComponent}/>
                         <Route path = "/actions/byUser/:userId" children={<ListActionsComponent/>}/>
                         <Route path = "/actions/byMission/:missionId" children={<ListActionsComponent/>}/>
                         <Route path = "/users/create" component = {CreateUserComponent}/>
                         <Route path = "/add-user/:id" component = {CreateUserComponent}/>
                         <Route path = "/view-user/:id" component = {ViewUserComponent}/>
                         <Route path = "/inscription" component = {Inscription}/>
-                        <Route path = "/missions" component = {Missions}/>
+                        <Route path = "/missions" component = {ListMissionsComponent}/>
                           {/* <Route path = "/update-user/:id" component = {UpdateuserComponent}></Route> */}
                     </Switch>
                 </div>

@@ -15,13 +15,13 @@ public class ActionWithUserScore {
 
     private String description;
 
-    private Action actionPrecedente;
+    private Integer actionPrecedente;
 
     private int scoreMinimum;
 
-    private int userScore;
+    private Integer userScore;
 
-    public ActionWithUserScore(int id, String description, Action actionPrecedente, Integer scoreMinimum, Integer userScore) {
+    public ActionWithUserScore(int id, String description, Integer actionPrecedente, Integer scoreMinimum, Integer userScore) {
         this.id = id;
         this.description = description;
         this.actionPrecedente = actionPrecedente;

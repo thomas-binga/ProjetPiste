@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ActionRepository extends JpaRepository<Action, Integer> {
 
-    @Query(value = "SELECT a FROM action a JOIN action__mission am ON a.id = am.fk_action WHERE am.fk_mission = ?1",
+    @Query(value = "SELECT a.* FROM action a JOIN action__mission am ON a.id = am.fk_action WHERE am.fk_mission = ?1",
             nativeQuery = true)
     List<Action> findActionByMissionId(int missionId);
 

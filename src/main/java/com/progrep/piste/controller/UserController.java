@@ -1,14 +1,12 @@
 
 package com.progrep.piste.controller;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.progrep.piste.model.Inscription;
-import com.progrep.piste.model.UserWithMissionId;
-import com.progrep.piste.model.Utilisateur;
-import com.progrep.piste.repository.InscriptionRepository;
-import com.progrep.piste.repository.MissionRepository;
+import com.progrep.piste.model.*;
+import com.progrep.piste.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,11 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.progrep.piste.exception.ResourceNotFoundException;
-import com.progrep.piste.repository.UserRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/")
+
 public class UserController {
 
 	@Autowired
@@ -35,6 +33,11 @@ public class UserController {
 	private InscriptionRepository InscriptionRepository;
 	@Autowired
 	private MissionRepository MissionRepository;
+	@Autowired
+	private InscriptionActionRepository InscriptionActionRepository;
+	@Autowired
+	private ActionRepository ActionRepository;
+
 	
 	// get all Users
 	@GetMapping("/users")
@@ -47,8 +50,16 @@ public class UserController {
 	@PostMapping("/users")
 	public Utilisateur createUser(@RequestBody UserWithMissionId userWithMissionId) {
 		Utilisateur user = UserRepository.save(userWithMissionId.getUtilisateur());
+		List<Action> actions = new ArrayList<>();
 		for (Integer missionId : userWithMissionId.getMissionIdList()) {
-			InscriptionRepository.save(new Inscription(user, MissionRepository.getReferenceById(missionId)));
+			Inscription inscription = new Inscription(user, MissionRepository.getReferenceById(missionId));
+			InscriptionRepository.save(inscription);
+			actions = ActionRepository.findActionByMissionId(missionId);
+			for (Action action : actions) {
+				InscriptionAction inscriptionAction = new InscriptionAction(inscription, action, 0);
+				InscriptionActionRepository.save(inscriptionAction);
+			}
+			actions.clear();
 			//TODO fill INSCRIPTION__ACTION as well
 		}
 		return user;

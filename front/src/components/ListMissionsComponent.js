@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import MissionsService from "../services/MissionsService";
+import {Redirect} from "react-router-dom";
 
-const Missions = (user) => {
+const ListMissionsComponent = (user) => {
 
     const [missions, setMissions] = useState([])
+    const [redirectState, setRedirectState] = useState({redirect: false, path: ""});
 
     useEffect(() => {
         MissionsService.getMissions().then(response => {
@@ -13,11 +15,12 @@ const Missions = (user) => {
     }, [])
 
     function seeAction(id){
-        // TODO
+        setRedirectState({redirect: true, path: "/actions/byMission/"+id});
     }
 
 
     return (
+        redirectState.redirect ? <Redirect to={redirectState.path}/> :
         <div>
             <h1 className="text-center" style={{fontSize: "40px", margin: "20px 0px"}}>Liste des missions</h1>
             <div className = "row">
@@ -37,7 +40,7 @@ const Missions = (user) => {
                                     <td> {mission.id} </td>
                                     <td> {mission.nom} </td>
                                     <td>
-                                        <button onClick={ () => seeAction(user.id)} className="btn btn-info"> Voir Actions </button>
+                                        <button onClick={ () => seeAction(mission.id)} className="btn btn-info"> Voir Actions </button>
                                     </td>
                                 </tr>
                         )
@@ -52,4 +55,4 @@ const Missions = (user) => {
 }
 
 
-export default Missions;
+export default ListMissionsComponent;

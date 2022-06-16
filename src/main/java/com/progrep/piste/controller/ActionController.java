@@ -25,7 +25,7 @@ public class ActionController {
     }
 
     @GetMapping("/actions/byMissionId/{id}")
-    public List<Action> getActionsByMissionId(@PathVariable Integer id) {
+    public List<Action> getActionsByMissionId(@PathVariable Integer id) { //TODO : fix that
         return ActionRepository.findActionByMissionId(id);
     }
 
