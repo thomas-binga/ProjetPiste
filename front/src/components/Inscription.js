@@ -3,36 +3,41 @@ import UserService from "../services/UserService";
 
 export default function App() {
 
-    const userService = UserService;
-
-    const [email, setEmail] = useState("");
-    const [surname, setSurname] = useState("");
-    const [forename, setForename] = useState("");
-    const [missions, setMissions] = useState({mission1 : false, mission2 : false});
-    const [errorVisibility, setErrorVisibility] = useState(false);
+    const [user, setUser] = useState({surname: "", forename: "", email: ""});
+    const [missions, setMissions] = useState({mission1: false, mission2: false});
+    const [missionErrorVisibility, setMissionErrorVisibility] = useState(false);
+    const [message, setMessage] = useState({className: "", isShown: false, text: ""});
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setMessage(prevState => ({...prevState, isShown: false}));
         if (Object.values(missions).find(boolValue => boolValue === true)) {
-            setErrorVisibility(false);
-            try {
-                const user = {surname, forename, email};
-                const missionList = [];
-                Object.values(missions).forEach((boolValue, index) => {
-                    if (boolValue) missionList.push(index + 1);
+            setMissionErrorVisibility(false);
+            const missionIdList = [];
+            Object.values(missions).forEach((boolValue, index) => {
+                if (boolValue) missionIdList.push(index + 1);
+            });
+            UserService.createUser({utilisateur: user, missionIdList}).then(res => {
+                console.log(res);
+                setMessage({
+                    className: "alert alert-success",
+                    isShown: true,
+                    text: "L'utilisateur " + res.data.forename + " " + res.data.surname + " a été enregistré."
                 });
-                userService.createUser({user, missions: missionList}).then(res => console.log(res));
-            } catch (e) {
-                console.error(e);
-            }
+                setUser({surname: "", forename: "", email: ""});
+                setMissions({mission1: false, mission2: false});
+            }).catch(error => {
+                console.error(error);
+                setMessage({className: "alert alert-danger", isShown: true, text: error.toString()});
+            });
         } else {
-            setErrorVisibility(true);
+            setMissionErrorVisibility(true);
         }
     }
 
     return (
         <div>
-            <h1 style={{fontSize: "40px", margin: "20px 0px"}}>Enregistrer Apprenant</h1>
+            <h1 className="text-center" style={{fontSize: "40px", margin: "20px 0px"}}>Enregistrer un apprenant</h1>
             <form
                 onSubmit={handleSubmit}
                 style={{
@@ -48,18 +53,26 @@ export default function App() {
                     <input
                         name="email"
                         type="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        required/>
+                        value={user.email}
+                        onChange={event => {
+                            event.persist();
+                            setUser(prevState => ({...prevState, email: event.target.value}));
+                        }}
+                        required
+                    />
                 </label>
                 <br/>
                 <label>
                     Nom :&emsp;
                     <input
                         name="surname"
-                        value={surname}
-                        onChange={e => setSurname(e.target.value)}
-                        required>
+                        value={user.surname}
+                        onChange={event => {
+                            event.persist();
+                            setUser(prevState => ({...prevState, surname: event.target.value}));
+                        }}
+                        required
+                    >
                     </input>
                 </label>
                 <br/>
@@ -67,9 +80,13 @@ export default function App() {
                     Prénom :&emsp;
                     <input
                         name="forename"
-                        value={forename}
-                        onChange={e => setForename(e.target.value)}
-                        required>
+                        value={user.forename}
+                        onChange={event => {
+                            event.persist();
+                            setUser(prevState => ({...prevState, forename: event.target.value}));
+                        }}
+                        required
+                    >
                     </input>
                 </label>
                 <br/>
@@ -77,7 +94,8 @@ export default function App() {
                     <input
                         name="mission1"
                         type="checkbox"
-                        onChange={() => setMissions((prev) => ({...prev, mission1: !missions.mission1}))}
+                        checked={missions.mission1}
+                        onChange={() => setMissions(prevState => ({...prevState, mission1: !missions.mission1}))}
                     />
                     &ensp;Mission 1
                 </label>
@@ -86,15 +104,18 @@ export default function App() {
                     <input
                         name="mission2"
                         type="checkbox"
-                        onChange={() => setMissions(prev => ({...prev, mission2: !missions.mission2}))}
+                        checked={missions.mission2}
+                        onChange={() => setMissions(prevState => ({...prevState, mission2: !missions.mission2}))}
                     />
                     &ensp;Mission 2
                 </label>
-                {errorVisibility && <div style={{color: "red"}}>Vous devez cocher au moins une mission.</div>}
+                {missionErrorVisibility ? <div className="alert alert-warning" style={{margin: "0px 30%"}}>Vous devez cocher au moins une mission.</div> : <br/>}
                 <br/>
-                <button className="btn btn-primary" style={{marginTop: "20px"}}>Submit</button>
+                <button className="btn btn-primary">Submit</button>
+                <br/>
+                {message.isShown && <><br/><div className={message.className} style={{margin: "0px 30%"}}>{message.text}</div></>}
             </form>
         </div>
     );
-}
 
+}

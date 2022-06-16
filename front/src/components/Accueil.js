@@ -8,7 +8,7 @@ const Accueil = () => {
 
     return (
         <div>
-            <h1 style={{fontSize: "40px", margin: "20px 0px"}}>Accueil</h1>
+            <h1 className="text-center" style={{fontSize: "40px", margin: "20px 0px"}}>Accueil</h1>
             <div style={{
                 backgroundColor: "#eeeeee",
                 borderRadius: "10px",

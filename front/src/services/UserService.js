@@ -8,8 +8,8 @@ class UserService {
         return axios.get(USER_API_BASE_URL);
     }
 
-    createUser({user, missions}) {
-        return axios.post(USER_API_BASE_URL, {utilisateur: user, missionIdList: missions});
+    createUser({utilisateur, missionIdList}) {
+        return axios.post(USER_API_BASE_URL, {utilisateur, missionIdList});
     }
 
     getUserById(userId) {

@@ -42,11 +42,7 @@ const ListActionsComponent = () => {
 
     return (
         <div>
-            <h2 className="text-center">Liste des actions</h2>
-            {/*<div className = "row">*/}
-            {/*    <button className="btn btn-primary" onClick={addUser}>Add User</button>*/}
-            {/*</div>*/}
-            <br></br>
+            <h1 className="text-center" style={{fontSize: "40px", margin: "20px 0px"}}>Liste des actions</h1>
             <div className = "row">
                 <table className = "table table-striped table-bordered">
 

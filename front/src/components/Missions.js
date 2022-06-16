@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import MissionsService from "../services/MissionsService";
 
-const pStyle = {fontSize: "15px", margin: "0px 0px 0px 50px"};
-
 const Missions = (user) => {
 
     const [missions, setMissions] = useState([])
@@ -21,20 +19,17 @@ const Missions = (user) => {
 
     return (
         <div>
-            <h2 className="text-center">Liste des missions</h2>
+            <h1 className="text-center" style={{fontSize: "40px", margin: "20px 0px"}}>Liste des missions</h1>
             {/*<div className = "row">*/}
             {/*    <button className="btn btn-primary" onClick={addUser}>Add User</button>*/}
             {/*</div>*/}
-            <br></br>
             <div className = "row">
                 <table className = "table table-striped table-bordered">
-
                     <thead>
                     <tr>
                         <th> Id </th>
                         <th> Nom de la mission</th>
                         <th> Actions </th>
-
                     </tr>
                     </thead>
                     <tbody>
