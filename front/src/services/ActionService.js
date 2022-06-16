@@ -9,7 +9,7 @@ class ActionService {
                 return axios.get(ACTION_API_BASE_URL + '/byUserId/' + userId);
             }
             else if (missionId) {
-                return axios.get(ACTION_API_BASE_URL + '/byMissionId' + missionId);
+                return axios.get(ACTION_API_BASE_URL + '/byMissionId/' + missionId);
             }
             return axios.get(ACTION_API_BASE_URL);
         }

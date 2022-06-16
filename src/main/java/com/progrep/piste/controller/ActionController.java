@@ -1,10 +1,12 @@
 package com.progrep.piste.controller;
 
 import com.progrep.piste.model.Action;
+import com.progrep.piste.model.ActionWithUserScore;
 import com.progrep.piste.repository.ActionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,9 +30,14 @@ public class ActionController {
     }
 
     @GetMapping("/actions/byUserId/{id}")
-    public List<Action> getActionsByUserId(@PathVariable Integer id) {
+    public List<ActionWithUserScore> getActionsByUserId(@PathVariable Integer id) {
         List<Action> actions = ActionRepository.findActionByUserId(id); //TODO return scores as well
-        return actions;
+        List<Integer> scores = ActionRepository.findScoresByActionList(actions);
+        List<ActionWithUserScore> actionWithUserScores = new ArrayList<>();
+        for (int i = 0; i < actions.size(); i++) {
+            actionWithUserScores.add(new ActionWithUserScore(actions.get(i).getId(), actions.get(i).getDescription(), actions.get(i).getActionPrecedente(), actions.get(i).getScoreMinimum(), scores.get(i)));
+        }
+        return actionWithUserScores;
     }
 
 

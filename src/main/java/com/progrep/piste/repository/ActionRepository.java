@@ -15,6 +15,7 @@ public interface ActionRepository extends JpaRepository<Action, Integer> {
             nativeQuery = true)
     List<Action> findActionByMissionId(int missionId);
 
+
     @Query(value = "SELECT a.* FROM action a " +
             "JOIN inscription__action ia ON a.id = ia.fk_action " +
             "JOIN inscription i on i.id = ia.fk_inscription" +
@@ -22,14 +23,19 @@ public interface ActionRepository extends JpaRepository<Action, Integer> {
             nativeQuery = true)
     List<Action> findActionByUserId(int userId);
 
-//    @Query(value = """
-//SELECT Action from Action a
-//JOIN InscriptionAction ia on ia.action = a
-//JOIN Inscription i on ia.inscription = i
-//WHERE i.
-//
-//""")
-//    List<ActionWithUserScore> findActionAndScoreByUserId(int userId);
+    @Query(value = """
+SELECT new com.progrep.piste.model.ActionWithUserScore(a.id, a.description, a.actionPrecedente, a.scoreMinimum, ia.score) from Action a
+JOIN InscriptionAction ia on ia.action = a
+JOIN Inscription i on ia.inscription = i
+WHERE i.utilisateur.NumUtil = ?1
+""")
+    List<ActionWithUserScore> findActionAndScoreByUserId(int userId);
+
+    @Query(value = """
+SELECT ia.score FROM inscription__action ia
+            WHERE ia.fk_action in (?1) 
+""", nativeQuery = true)
+    List<Integer> findScoresByActionList(List<Action> actions);
 
 }
 

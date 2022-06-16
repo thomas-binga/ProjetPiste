@@ -21,11 +21,15 @@ public class ActionWithUserScore {
 
     private int userScore;
 
-    public ActionWithUserScore(int id, String description, Action actionPrecedente, int scoreMinimum, int userScore) {
+    public ActionWithUserScore(int id, String description, Action actionPrecedente, Integer scoreMinimum, Integer userScore) {
         this.id = id;
         this.description = description;
         this.actionPrecedente = actionPrecedente;
         this.scoreMinimum = scoreMinimum;
-        this.userScore = userScore;
+        if (userScore != null) {
+            this.userScore = userScore;
+        }else {
+            this.userScore = 0;
+        }
     }
 }
