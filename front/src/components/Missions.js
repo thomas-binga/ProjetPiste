@@ -20,9 +20,6 @@ const Missions = (user) => {
     return (
         <div>
             <h1 className="text-center" style={{fontSize: "40px", margin: "20px 0px"}}>Liste des missions</h1>
-            {/*<div className = "row">*/}
-            {/*    <button className="btn btn-primary" onClick={addUser}>Add User</button>*/}
-            {/*</div>*/}
             <div className = "row">
                 <table className = "table table-striped table-bordered">
                     <thead>

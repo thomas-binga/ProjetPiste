@@ -41,7 +41,7 @@ const ListActionsComponent = () => {
 
 
     return (
-        <div>
+        <div style={{marginBottom: "40px"}}>
             <h1 className="text-center" style={{fontSize: "40px", margin: "20px 0px"}}>Liste des actions</h1>
             <div className = "row">
                 <table className = "table table-striped table-bordered">
