@@ -16,8 +16,6 @@ import javax.persistence.Table;
 @Table(name = "utilisateur")
 public class Utilisateur {
 
-
-
 	@Id
 	@Column(name = "numutil")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +29,6 @@ public class Utilisateur {
 	
 	@Column(name = "email")
 	private String email;
-
 	
 	public Utilisateur(String surname, String forename, String email) {
 		super();
@@ -42,7 +39,6 @@ public class Utilisateur {
 
 	public Utilisateur() {
 		super();
-
 	}
 
 }

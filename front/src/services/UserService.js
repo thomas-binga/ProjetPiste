@@ -8,8 +8,8 @@ class UserService {
         return axios.get(USER_API_BASE_URL);
     }
 
-    createUser(user) {
-        return axios.post(USER_API_BASE_URL, user);
+    createUser({user, missions}) {
+        return axios.post(USER_API_BASE_URL, {user, missions});
     }
 
     getUserById(userId) {
@@ -23,6 +23,7 @@ class UserService {
     deleteUser(userId) {
         return axios.delete(USER_API_BASE_URL + '/' + userId);
     }
+
 }
 
-export default new UserService()
+export default new UserService();

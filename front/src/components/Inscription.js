@@ -13,10 +13,18 @@ export default function App() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (missions.mission1 || missions.mission2) {
+        if (Object.values(missions).find(boolValue => boolValue === true)) {
             setErrorVisibility(false);
-            console.log({email, forename, surname, missions});
-            console.log(userService.createUser({surname, forename, email}));
+            try {
+                const user = {surname, forename, email};
+                const missionList = [];
+                Object.values(missions).forEach((boolValue, index) => {
+                    if (boolValue) missionList.push(index + 1);
+                });
+                userService.createUser({user, missions: missionList}).then(res => console.log(res));
+            } catch (e) {
+                console.error(e);
+            }
         } else {
             setErrorVisibility(true);
         }
