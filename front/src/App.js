@@ -11,6 +11,7 @@ import ViewUserComponent from './components/ViewUserComponent';
 import Accueil from "./components/Accueil";
 import Inscription from "./components/Inscription";
 import ListActionsComponent from "./components/ListActionsComponent";
+import Missions from "./components/Missions";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                         <Route path = "/add-user/:id" component = {CreateUserComponent}/>
                         <Route path = "/view-user/:id" component = {ViewUserComponent}/>
                         <Route path = "/inscription" component = {Inscription}/>
+                        <Route path = "/missions" component = {Missions}/>
                           {/* <Route path = "/update-user/:id" component = {UpdateuserComponent}></Route> */}
                     </Switch>
                 </div>
