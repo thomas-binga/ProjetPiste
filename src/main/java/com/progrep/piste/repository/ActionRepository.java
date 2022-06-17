@@ -32,10 +32,10 @@ WHERE i.utilisateur.NumUtil = ?1
     List<ActionWithUserScore> findActionAndScoreByUserId(int userId);
 
     @Query(value = """
-SELECT ia.score FROM inscription__action ia
-            WHERE ia.fk_action in (?1) 
+SELECT ia.score FROM inscription__action ia JOIN inscription i on ia.fk_inscription = i.id
+            WHERE ia.fk_action = ?1 AND i.fk_utilisateur = ?2
 """, nativeQuery = true)
-    List<Integer> findScoresByActionList(List<Action> actions);
+    List<Integer> findScoreByAction(Action action, Integer userId);
 
 }
 

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -31,5 +32,13 @@ public class ActionWithUserScore {
         }else {
             this.userScore = 0;
         }
+    }
+
+    public ActionWithUserScore(Action action, Integer userScore) {
+        this.id = action.getId();
+        this.description = action.getDescription();
+        this.actionPrecedente = action.getActionPrecedente();
+        this.scoreMinimum = action.getScoreMinimum();
+        this.userScore = Objects.requireNonNullElse(userScore, 0);
     }
 }
