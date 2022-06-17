@@ -35,7 +35,7 @@ WHERE i.utilisateur.NumUtil = ?1
 SELECT ia.score FROM inscription__action ia JOIN inscription i on ia.fk_inscription = i.id
             WHERE ia.fk_action = ?1 AND i.fk_utilisateur = ?2
 """, nativeQuery = true)
-    List<Integer> findScoreByAction(Action action, Integer userId);
+    int findScoreByAction(Action action, Integer userId);
 
 }
 

@@ -1,5 +1,7 @@
 package com.progrep.piste.repository;
 
+import com.progrep.piste.model.Action;
+import com.progrep.piste.model.Inscription;
 import com.progrep.piste.model.InscriptionAction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -18,6 +20,8 @@ public interface InscriptionActionRepository extends JpaRepository<InscriptionAc
             nativeQuery = true
     )
     void deleteAllByUtilisateur_NumUtil(int numUtil);
+
+    InscriptionAction findByActionAndInscription(Action action, Inscription inscription);
 
 }
 

@@ -7,13 +7,7 @@ import com.progrep.piste.model.*;
 import com.progrep.piste.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -56,16 +50,21 @@ public class UserController {
 		return user;
 	}
 
-	/*@PutMapping("/Users/{id}")
-	public ResponseEntity<Utilisateur> updateUser(@PathVariable Integer id, @RequestBody Utilisateur utilisateurDetails){
-		Utilisateur utilisateur = UserRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
-		utilisateur.setSurname(utilisateurDetails.getSurname());
-		utilisateur.setForename(utilisateurDetails.getForename());
-		utilisateur.setEmail(utilisateurDetails.getEmail());
-		Utilisateur updatedUtilisateur = UserRepository.save(utilisateur);
-		return ResponseEntity.ok(updatedUtilisateur);
-	}*/
+//	@PutMapping("/Users/{id}")
+//	public ResponseEntity<Utilisateur> updateUser(@PathVariable Integer id, @RequestBody Utilisateur utilisateurDetails){
+//		Utilisateur utilisateur = UserRepository.findById(id)
+//				.orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
+//		utilisateur.setSurname(utilisateurDetails.getSurname());
+//		utilisateur.setForename(utilisateurDetails.getForename());
+//		utilisateur.setEmail(utilisateurDetails.getEmail());
+//		Utilisateur updatedUtilisateur = UserRepository.save(utilisateur);
+//		return ResponseEntity.ok(updatedUtilisateur);
+//	}
+
+	@GetMapping("/users/{id}")
+	public Utilisateur getUserById(@PathVariable Integer id){
+		return userRepository.findById(id).orElse(null);
+	}
 	
 	@Transactional
 	@PostMapping("/users/delete/{numUtil}")

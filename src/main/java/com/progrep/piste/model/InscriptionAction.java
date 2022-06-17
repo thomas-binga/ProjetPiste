@@ -1,7 +1,11 @@
 package com.progrep.piste.model;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+@Setter
+@Getter
 @Entity
 @Table(name = "inscription__action")
 public class InscriptionAction {
@@ -19,7 +23,7 @@ public class InscriptionAction {
 
 
     @Column(name = "score")
-    private int score;
+    private int  score;
 
 
     public InscriptionAction(Inscription inscription, Action action, int score) {

@@ -14,6 +14,10 @@ class ActionService {
         return axios.get(ACTION_API_BASE_URL);
     }
 
+    doAction({userId, actionId}) {
+        return axios.post(ACTION_API_BASE_URL + '/do/' + userId + '/' + actionId);
+    }
+
 }
 
 export default new ActionService();
