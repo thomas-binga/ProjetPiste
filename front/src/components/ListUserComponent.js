@@ -9,14 +9,16 @@ const ListUserComponent = () => {
 
     useEffect(() => {
         UserService.getUsers().then(response => {
-            console.log("retrieving users", {response})
-            setUsers(response.data)
+            setUsers(response.data);
         })
     }, []);
 
-    function deleteUser(id) {
-        UserService.deleteUser(id).then(() => {
-            this.setState({users: this.state.users.filter(user => user.id !== id)});
+    const deleteUser = (numUtil) => {
+        UserService.deleteUser(numUtil).then(() => {
+            setUsers(users.filter(user => user.numUtil !== numUtil));
+        }).catch(error => {
+            console.error(error);
+            window.alert(error.toString());
         });
     }
 
@@ -29,7 +31,6 @@ const ListUserComponent = () => {
     function editUser(id) {
         // this.props.history.push(`/add-user/${id}`); TODO
     }
-
     // function componentDidMount(){
     //     UserService.getUsers().then((res) => {
     //         setUsers(res.data);
@@ -70,18 +71,18 @@ const ListUserComponent = () => {
                                                 onClick={() => viewActions(user.numUtil)}
                                                 className="btn btn-info"
                                             >
-                                                Voir ses actions
+                                                Voir les scores
                                             </button>
                                             <button
                                                 style={{marginLeft: "10px"}}
                                                 onClick={() => editUser(user.id)}
                                                 className="btn btn-primary"
                                             >
-                                                Mettre à jour
+                                                Modifier
                                             </button>
                                             <button
                                                 style={{marginLeft: "10px"}}
-                                                onClick={() => deleteUser(user.id)}
+                                                onClick={() => deleteUser(user.numUtil)}
                                                 className="btn btn-danger"
                                             >
                                                 Supprimer

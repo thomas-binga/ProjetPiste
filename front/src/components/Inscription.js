@@ -97,7 +97,7 @@ export default function App() {
                         checked={missions.mission1}
                         onChange={() => setMissions(prevState => ({...prevState, mission1: !missions.mission1}))}
                     />
-                    &ensp;Mission 1
+                    &ensp;Mission A
                 </label>
                 &emsp;&emsp;
                 <label>
@@ -107,11 +107,11 @@ export default function App() {
                         checked={missions.mission2}
                         onChange={() => setMissions(prevState => ({...prevState, mission2: !missions.mission2}))}
                     />
-                    &ensp;Mission 2
+                    &ensp;Mission B
                 </label>
                 {missionErrorVisibility ? <div className="alert alert-warning" style={{margin: "0px 30%"}}>Vous devez cocher au moins une mission.</div> : <br/>}
                 <br/>
-                <button className="btn btn-primary">Submit</button>
+                <button className="btn btn-primary">Enregistrer</button>
                 <br/>
                 {message.isShown && <><br/><div className={message.className} style={{margin: "0px 30%"}}>{message.text}</div></>}
             </form>

@@ -27,11 +27,11 @@ const Accueil = () => {
                     <p style={pStyle}>Cette application vous permettra de suivre pas à pas tous les apprentissages.</p>
                     <p style={pStyle}>En vous souhaitant une agréable visite !</p>
                     <br/>
-                    <p style={pStyle}>Pour commencer, vous pouvez :</p>
+                    <p style={pStyle}>Vous pouvez par exemple :</p>
                     <ol>
                         <li style={pStyle}><a href="/inscription">Enregistrer un apprenant</a></li>
-                        <li style={pStyle}><a href="">Inscrire un apprenant à des actions</a></li>
-                        <li style={pStyle}><a href="">Accéder à la liste des missions</a></li>
+                        <li style={pStyle}><a href="/actions/byUser/17">Voir les scores de Jean Henry (utilisateur 17)</a></li>
+                        <li style={pStyle}><a href="/actions/byMission/2">Accéder à la liste des actions pour la mission B</a></li>
                     </ol>
                     <p style={pStyle}>D'autres informations, comme la liste des apprenants ou des actions, sont disponibles dans la bar de navigation en haut.</p>
                 </div>

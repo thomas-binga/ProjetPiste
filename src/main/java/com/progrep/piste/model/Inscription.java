@@ -29,8 +29,8 @@ public class Inscription {
         this.fk_mission = mission;
     }
 
-
     public Inscription() {
         super();
     }
+
 }
